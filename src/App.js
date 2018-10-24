@@ -1,3 +1,5 @@
+// REMOVE ALL SHARED STATE FROM PARENT COMPONENTS
+
 import React, { Component } from "react";
 import gamesData from "./gamesData";
 import AddPlayer from "./components/AddPlayer";
@@ -8,16 +10,15 @@ import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
   state = {
-    teams: gamesData.teams,
-    selectedPlayer: null,
+    // teams: gamesData.teams,
+    // selectedPlayer: null,
     showForm: false
   };
 
   handleSelectPlayer = player => {
-    this.setState({
-      selectedPlayer: player
-    });
-
+    // this.setState({
+    //   selectedPlayer: player
+    // });
     // NO MUTATION
     // this.state.selectedPlayer = player;
   };
@@ -27,13 +28,13 @@ class App extends Component {
   };
 
   handleAddPlayer = player => {
-    const team = this.state.teams.find(team => team.id === player.team_id);
-    const teamIndex = this.state.teams.indexOf(team);
-    const playersCopy = [...team.players, player];
-    const teamCopy = { ...team, players: playersCopy };
-    const teamsCopy = [...this.state.teams];
-    teamsCopy.splice(teamIndex, 1, teamCopy);
-    this.setState({ teams: teamsCopy });
+    //   const team = this.state.teams.find(team => team.id === player.team_id);
+    //   const teamIndex = this.state.teams.indexOf(team);
+    //   const playersCopy = [...team.players, player];
+    //   const teamCopy = { ...team, players: playersCopy };
+    //   const teamsCopy = [...this.state.teams];
+    //   teamsCopy.splice(teamIndex, 1, teamCopy);
+    //   this.setState({ teams: teamsCopy });
   };
 
   render() {
@@ -42,19 +43,13 @@ class App extends Component {
         <NavHeader />
         <button onClick={this.handleShowForm}>Show Form</button>
         {this.state.showForm ? (
-          <AddPlayer
-            teams={this.state.teams}
-            addPlayer={this.handleAddPlayer}
-          />
+          <AddPlayer addPlayer={this.handleAddPlayer} />
         ) : null}
-        <TeamList
-          teams={this.state.teams}
-          selectPlayer={this.handleSelectPlayer}
-        />
+        <TeamList selectPlayer={this.handleSelectPlayer} />
         {!this.state.selectedPlayer ? (
           <div> Click Player for Details </div>
         ) : (
-          <PlayerDetails selectedPlayer={this.state.selectedPlayer} />
+          <PlayerDetails />
         )}
       </div>
     );
@@ -62,3 +57,19 @@ class App extends Component {
 }
 
 export default App;
+
+// DISPATCH calls reducer with current state and passed action
+// const playerData = {
+//   id: 200,
+//   name: "humzah",
+//   number: 8.5,
+//   shoe: 7,
+//   points: 600,
+//   rebounds: 500,
+//   assists: 400,
+//   steals: 300,
+//   blocks: 200,
+//   slamDunks: 100,
+//   team_id: 2
+// };
+// store.dispatch(addPlayer(playerData));
