@@ -14,26 +14,8 @@ class App extends Component {
     showForm: false
   };
 
-  handleSelectPlayer = player => {
-    // this.setState({
-    //   selectedPlayer: player
-    // });
-    // NO MUTATION
-    // this.state.selectedPlayer = player;
-  };
-
   handleShowForm = e => {
     this.setState({ showForm: !this.state.showForm });
-  };
-
-  handleAddPlayer = player => {
-    //   const team = this.state.teams.find(team => team.id === player.team_id);
-    //   const teamIndex = this.state.teams.indexOf(team);
-    //   const playersCopy = [...team.players, player];
-    //   const teamCopy = { ...team, players: playersCopy };
-    //   const teamsCopy = [...this.state.teams];
-    //   teamsCopy.splice(teamIndex, 1, teamCopy);
-    //   this.setState({ teams: teamsCopy });
   };
 
   render() {
@@ -41,10 +23,8 @@ class App extends Component {
       <div className="App">
         <NavHeader />
         <button onClick={this.handleShowForm}>Show Form</button>
-        {this.state.showForm ? (
-          <AddPlayer addPlayer={this.handleAddPlayer} />
-        ) : null}
-        <TeamList selectPlayer={this.handleSelectPlayer} />
+        {this.state.showForm ? <AddPlayer /> : null}
+        <TeamList />
         {!this.props.selectedPlayer ? (
           <div> Click Player for Details </div>
         ) : (

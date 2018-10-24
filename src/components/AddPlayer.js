@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addPlayer } from "../actions/teams_actions";
 
 class AddPlayer extends Component {
   state = {
@@ -158,4 +160,19 @@ class AddPlayer extends Component {
   }
 }
 
-export default AddPlayer;
+const mapStateToProps = state => {
+  return {
+    teams: state.teams
+  };
+};
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addPlayer: player => dispatch(addPlayer(player))
+//   };
+// };
+
+export default connect(
+  mapStateToProps,
+  { addPlayer }
+)(AddPlayer);

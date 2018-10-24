@@ -1,5 +1,5 @@
 import gamesData from "../gamesData";
-import { ADD_PLAYER } from "../actions/teams_actions";
+import { ADD_PLAYER, SELECT_PLAYER } from "../actions/teams_actions";
 
 // INITIAL STATE
 const initialState = {
@@ -19,6 +19,8 @@ export default (state = initialState, action) => {
       const teamsCopy = [...state.teams];
       teamsCopy.splice(teamIndex, 1, teamCopy);
       return { ...state, teams: teamsCopy };
+    case SELECT_PLAYER:
+      return { ...state, selectedPlayer: action.player };
     default:
       return state;
   }

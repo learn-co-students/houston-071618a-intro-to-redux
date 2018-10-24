@@ -7,7 +7,6 @@ import "./index.css";
 import App from "./App";
 import { createStore } from "redux";
 import reducer from "./reducers/teams_reducer";
-import { addPlayer } from "./actions/teams_actions";
 import { Provider } from "react-redux";
 
 // STORE manages state
