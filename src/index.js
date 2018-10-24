@@ -12,6 +12,7 @@ import App from "./App";
 import { createStore } from "redux";
 import reducer from "./reducers/teams_reducer";
 import { addPlayer } from "./actions/teams_actions";
+import { Provider } from "react-redux";
 
 // STORE manages state
 const store = createStore(reducer);
@@ -39,4 +40,9 @@ store.dispatch(addPlayer(playerData));
 
 debugger;
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
