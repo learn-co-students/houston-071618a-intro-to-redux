@@ -1,14 +1,11 @@
-import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import React from "react";
+import { Card, Image } from "semantic-ui-react";
 
 const PlayerDetails = ({ selectedPlayer }) => {
   return (
-    <Card
-      className='player-details'>
-      <Image src='http://www.burkenc.org/assets/PublishingImages/Parks%20and%20Rec/Basketball.png'/>
-      <Card.Header>
-        {selectedPlayer.name}
-      </Card.Header>
+    <Card className="player-details">
+      <Image src="http://www.burkenc.org/assets/PublishingImages/Parks%20and%20Rec/Basketball.png" />
+      <Card.Header>{selectedPlayer.name}</Card.Header>
       <Card.Content className="detail-text">
         <Card.Meta>Number: {selectedPlayer.number}</Card.Meta>
         <Card.Meta>Shoe: {selectedPlayer.shoe}</Card.Meta>
@@ -20,13 +17,13 @@ const PlayerDetails = ({ selectedPlayer }) => {
         <Card.Meta>Slam Dunks: {selectedPlayer.slamDunks}</Card.Meta>
       </Card.Content>
     </Card>
-  )
-}
+  );
+};
 
-export default PlayerDetails
+export default PlayerDetails;
 
-{/* <div>
+/* <div>
   <img src={selectedPlayer.image_url}></img>
   <p>{selectedPlayer.name}</p>
 
-</div> */}
+</div> */

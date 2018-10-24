@@ -1,31 +1,38 @@
-import React, { Component } from 'react';
-import './App.css';
-import gamesData from './gamesData'
-import TeamList from './components/TeamList'
-import PlayerDetails from './components/PlayerDetails'
-import NavHeader from './components/Header'
-import 'semantic-ui-css/semantic.min.css';
-
+import React, { Component } from "react";
+import gamesData from "./gamesData";
+import TeamList from "./components/TeamList";
+import PlayerDetails from "./components/PlayerDetails";
+import NavHeader from "./components/Header";
+import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
   state = {
     teams: gamesData.teams,
     selectedPlayer: null
-  }
+  };
 
-  handleSelectPlayer = (player) => {
+  handleSelectPlayer = player => {
     this.setState({
       selectedPlayer: player
-    })
-  }
+    });
+
+    // NO MUTATION
+    // this.state.selectedPlayer = player;
+  };
 
   render() {
     return (
       <div className="App">
         <NavHeader />
-        <TeamList teams={this.state.teams} selectPlayer={this.handleSelectPlayer}/>
-        {!this.state.selectedPlayer ? <div> Click Player for Details </div> :
-          <PlayerDetails selectedPlayer={this.state.selectedPlayer}/>}
+        <TeamList
+          teams={this.state.teams}
+          selectPlayer={this.handleSelectPlayer}
+        />
+        {!this.state.selectedPlayer ? (
+          <div> Click Player for Details </div>
+        ) : (
+          <PlayerDetails selectedPlayer={this.state.selectedPlayer} />
+        )}
       </div>
     );
   }
