@@ -7,11 +7,10 @@ import TeamList from "./components/TeamList";
 import PlayerDetails from "./components/PlayerDetails";
 import NavHeader from "./components/Header";
 import "semantic-ui-css/semantic.min.css";
+import { connect } from "react-redux";
 
 class App extends Component {
   state = {
-    // teams: gamesData.teams,
-    // selectedPlayer: null,
     showForm: false
   };
 
@@ -46,7 +45,7 @@ class App extends Component {
           <AddPlayer addPlayer={this.handleAddPlayer} />
         ) : null}
         <TeamList selectPlayer={this.handleSelectPlayer} />
-        {!this.state.selectedPlayer ? (
+        {!this.props.selectedPlayer ? (
           <div> Click Player for Details </div>
         ) : (
           <PlayerDetails />
@@ -56,7 +55,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    selectedPlayer: state.selectedPlayer
+  };
+};
+
+export default connect(mapStateToProps)(App);
 
 // DISPATCH calls reducer with current state and passed action
 // const playerData = {
