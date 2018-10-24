@@ -1,10 +1,3 @@
-// Thursday
-//  - show different files
-//  - take the state out of app
-//  - build out the SELECT_PLAYER action creator & reducer case
-//  - connect / mstp / mdtp
-//  - (Tim) create form
-
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -51,13 +44,22 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "ADD_PLAYER":
+      // FROM APP.JS
+      // const team = this.state.teams.find(team => team.id == player.team_id);
+      // const teamIndex = this.state.teams.indexOf(team);
+      // const playersCopy = [...team.players, player];
+      // const teamCopy = { ...team, players: playersCopy };
+      // const teamsCopy = [...this.state.teams];
+      // teamsCopy.splice(teamIndex, 1, teamCopy);
+      // this.setState({ teams: teamsCopy });
+
       const player = action.player;
+      const team = state.teams.find(team => team.id === player.team_id);
+      const teamIndex = state.teams.indexOf(team);
+      const playersCopy = [...team.players, player];
+      const teamCopy = { ...team, players: playersCopy };
       const teamsCopy = [...state.teams];
-      const playerTeam = teamsCopy.find(team => team.id === player.teamId);
-      const playerTeamIndex = teamsCopy.indexOf(playerTeam);
-      const teamPlayers = [...playerTeam.players, player];
-      const playerTeamCopy = { ...playerTeam, players: teamPlayers };
-      teamsCopy.splice(playerTeamIndex, 1, playerTeamCopy);
+      teamsCopy.splice(teamIndex, 1, teamCopy);
       return { ...state, teams: teamsCopy };
     default:
       return state;
@@ -68,14 +70,12 @@ const reducer = (state = initialState, action) => {
 const store = createStore(reducer);
 
 // DISPATCH calls reducer with current state and passed action
-const playerData = { id: 1, teamId: 2, name: "Marylene" };
+const playerData = { id: 1, team_id: 2, name: "Marylene" };
 store.dispatch(addPlayer(playerData));
 // store.dispatch({ type: 'MY_ACTION' })
 // store.dispatch(myActionCreator())
 //
 // store.dispatch({ type: 'LEAVE_ROOM' })
 // store.dispatch({ type: 'DOOR_OPEN' })
-
-debugger;
 
 ReactDOM.render(<App />, document.getElementById("root"));
