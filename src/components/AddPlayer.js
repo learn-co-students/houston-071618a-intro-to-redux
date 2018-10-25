@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
 
 class AddPlayer extends Component {
   state = {
@@ -19,13 +20,13 @@ class AddPlayer extends Component {
     this.setState({
       [e.target.name]:
         e.target.name === "name" ? e.target.value : parseInt(e.target.value, 10)
-    });
+    }, () => console.log(this.state));
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.id && this.state.team_id) this.props.addPlayer(this.state);
+    if (this.state.id && this.state.team_id) this.props.submitPlayer(this.state);
   };
 
   autoFill = e => {
@@ -158,4 +159,19 @@ class AddPlayer extends Component {
   }
 }
 
-export default AddPlayer;
+function mapDispatchToProps(dispatch){
+  return {
+    submitPlayer: (player) => dispatch({
+      type: "ADD_PLAYER",
+      payload: player
+  })
+  }
+}
+
+function mapStateToProps(state){
+  return {
+    teams: state.teams
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlayer);

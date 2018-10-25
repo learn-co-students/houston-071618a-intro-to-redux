@@ -1,10 +1,10 @@
 import React from 'react'
 import Player from './Player'
 
-const Team = ({ team, selectPlayer }) => {
+const Team = ({ team }) => {
 
   const renderedPlayers = team.players.map(player => {
-    return <Player key={player.id} player={player} selectPlayer={selectPlayer}/>
+    return <Player key={player.id} player={player} />
   })
 
   return (

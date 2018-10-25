@@ -5,22 +5,15 @@ import TeamList from "./components/TeamList";
 import PlayerDetails from "./components/PlayerDetails";
 import NavHeader from "./components/Header";
 import "semantic-ui-css/semantic.min.css";
+import {connect} from 'react-redux'
 
 class App extends Component {
   state = {
-    teams: gamesData.teams,
-    selectedPlayer: null,
     showForm: false
   };
 
-  handleSelectPlayer = player => {
-    this.setState({
-      selectedPlayer: player
-    });
-
     // NO MUTATION
     // this.state.selectedPlayer = player;
-  };
 
   handleShowForm = e => {
     this.setState({ showForm: !this.state.showForm });
@@ -43,22 +36,24 @@ class App extends Component {
         <button onClick={this.handleShowForm}>Show Form</button>
         {this.state.showForm ? (
           <AddPlayer
-            teams={this.state.teams}
             addPlayer={this.handleAddPlayer}
           />
         ) : null}
-        <TeamList
-          teams={this.state.teams}
-          selectPlayer={this.handleSelectPlayer}
-        />
-        {!this.state.selectedPlayer ? (
+        <TeamList />
+        {!this.props.selectedPlayer ? (
           <div> Click Player for Details </div>
         ) : (
-          <PlayerDetails selectedPlayer={this.state.selectedPlayer} />
+          <PlayerDetails selectedPlayer={this.props.selectedPlayer} />
         )}
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    selectedPlayer: state.selectedPlayer
+  }
+}
+
+export default connect(mapStateToProps, null)(App);
